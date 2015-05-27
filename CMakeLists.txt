@@ -52,18 +52,21 @@ macro(add_hostconfig module config)
   #message("map: ${${module}_map}")
 endmacro()
 
+
+include(visit_windows)
+
 #add packages..
-include(adios)
-include(advio)
-include(boxlib)
-include(hdf5)
-include(mesa)
-include(mxml)
+#include(adios)
+#include(advio)
+#include(boxlib)
+#include(hdf5)
+#include(mesa)
+#include(mxml)
 include(python)
 include(qt)
-include(silo)
-include(szip)
-include(zlib)
+#include(silo)
+#include(szip)
+#include(zlib)
 include(vtk)
 
 #include the external project files..
@@ -85,10 +88,16 @@ endforeach()
 
 file(WRITE "${hostconfig}" "\#cmake file\n")
 
-file(APPEND "${hostconfig}" "VISIT_OPTION_DEFAULT(VISIT_C_COMPILER ${CMAKE_C_COMPILER} TYPE FILEPATH)\n")
-file(APPEND "${hostconfig}" "VISIT_OPTION_DEFAULT(VISIT_CXX_COMPILER ${CMAKE_CXX_COMPILER} TYPE FILEPATH)\n")
-file(APPEND "${hostconfig}" "VISIT_OPTION_DEFAULT(VISIT_C_FLAGS \"${CMAKE_C_FLAGS} -m64 -fPIC -fvisibility=hidden\" TYPE STRING)\n")
-file(APPEND "${hostconfig}" "VISIT_OPTION_DEFAULT(VISIT_CXX_FLAGS \"${CMAKE_CXX_FLAGS} -m64 -fPIC -fvisibility=hidden\" TYPE STRING)\n\n")
+file(APPEND "${hostconfig}" "VISIT_OPTION_DEFAULT(VISIT_C_COMPILER \"${CMAKE_C_COMPILER}\" TYPE FILEPATH)\n")
+file(APPEND "${hostconfig}" "VISIT_OPTION_DEFAULT(VISIT_CXX_COMPILER \"${CMAKE_CXX_COMPILER}\" TYPE FILEPATH)\n")
+
+if(NOT WIN32)
+  file(APPEND "${hostconfig}" "VISIT_OPTION_DEFAULT(VISIT_C_FLAGS \"${CMAKE_C_FLAGS} -m64 -fPIC -fvisibility=hidden\" TYPE STRING)\n")
+  file(APPEND "${hostconfig}" "VISIT_OPTION_DEFAULT(VISIT_CXX_FLAGS \"${CMAKE_CXX_FLAGS} -m64 -fPIC -fvisibility=hidden\" TYPE STRING)\n\n")
+else()
+  file(APPEND "${hostconfig}" "VISIT_OPTION_DEFAULT(VISIT_C_FLAGS \"${CMAKE_C_FLAGS} /DNOMINMAX\" TYPE STRING)\n")
+  file(APPEND "${hostconfig}" "VISIT_OPTION_DEFAULT(VISIT_CXX_FLAGS \"${CMAKE_CXX_FLAGS} /DNOMINMAX\" TYPE STRING)\n\n")
+endif()
 
 message(${hostconfig})
 foreach(module ${module_list})
@@ -96,7 +105,6 @@ foreach(module ${module_list})
         file(APPEND "${hostconfig}" "\#config for ${module}\n")    
         file(APPEND "${hostconfig}" "${${module}_map}\n\n")
     endif()
-
 endforeach()
 
 
