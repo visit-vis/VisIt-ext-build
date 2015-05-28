@@ -1,0 +1,20 @@
+set INCLUDE=@zlib_install@/include;@hdf5_install@\include;%INCLUDE%
+set LIB=@zlib_install@/lib;@hdf5_install@\lib;%LIB%
+
+devenv SiloWindows\MSVC2012\Silo.sln /upgrade
+devenv SiloWindows\MSVC2012\Silo.sln /build "@VISIT_BUILD_TYPE@|@VISIT_PLATFORM_TYPE@" /project Silo /projectconfig "@VISIT_BUILD_TYPE@|@VISIT_PLATFORM_TYPE@"
+msbuild /t:Silo /p:useenv=true /p:Configuration="@VISIT_BUILD_TYPE@" /p:Platform="@VISIT_PLATFORM_TYPE@" /p:BuildProjectReferences=false SiloWindows\MSVC2012\Silo.sln
+
+cd SiloWindows
+call copysilo.bat
+cd ..
+
+if not exist "@silo_install@/include" mkdir "@silo_install@/include"
+if not exist "@silo_install@/lib" mkdir "@silo_install@/lib"
+if not exist "@silo_install@/bin" mkdir "@silo_install@/bin"
+
+copy "SiloWindows\include\*.h" "@silo_install@\include"
+copy "src\silo\silo_exports.h" "@silo_install@\include"
+copy "SiloWindows\MSVC2012\@VISIT_PLATFORM_TYPE@\@VISIT_BUILD_TYPE@\*.lib" "@silo_install@\lib"
+copy "SiloWindows\MSVC2012\@VISIT_PLATFORM_TYPE@\@VISIT_BUILD_TYPE@\*.dll" "@silo_install@\bin"
+copy "SiloWindows\MSVC2012\@VISIT_PLATFORM_TYPE@\@VISIT_BUILD_TYPE@\*.exe" "@silo_install@\bin"

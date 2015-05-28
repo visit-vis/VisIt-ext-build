@@ -14,17 +14,21 @@ set(cxxflags "-fPIC ${CMAKE_CXX_FLAGS}")
 if(WIN32)
 
 #TODO: type..
-set(PYTHON_MACHINE_PATH "PCbuild/amd64")
+if(VISIT_PLATFORM_TYPE MATCHES "x64")
+  set(PYTHON_MACHINE_PATH "PCbuild/amd64")
+else()
+  set(PYTHON_MACHINE_PATH "PCbuild/win32")
+endif()
+
 
 set(PYTHON_BUILD_TYPE "Debug")
 set(PYTHON_INSTALL_COMMAND ${CMAKE_COMMAND} -E copy ${PYTHON_MACHINE_PATH}/python27_d.dll <INSTALL_DIR> && ${CMAKE_COMMAND} -E copy ${PYTHON_MACHINE_PATH}/python27_d.lib <INSTALL_DIR> && ${CMAKE_COMMAND} -E copy ${PYTHON_MACHINE_PATH}/python_d.exe <INSTALL_DIR> && ${CMAKE_COMMAND} -E copy ${PYTHON_MACHINE_PATH}/kill_python_d.exe <INSTALL_DIR> && ${CMAKE_COMMAND} -E copy_directory Lib <INSTALL_DIR>/Lib && ${CMAKE_COMMAND} -E copy_directory Include <INSTALL_DIR>/Include && ${CMAKE_COMMAND} -E copy PC/pyconfig.h <INSTALL_DIR>/Include/pyconfig.h && ${CMAKE_COMMAND} -E make_directory <INSTALL_DIR>/Libs/ && ${CMAKE_COMMAND} -E copy ${PYTHON_MACHINE_PATH}/python27_d.lib <INSTALL_DIR>/Libs/)
 
-if(${CMAKE_BUILD_TYPE} MATCHES "Release")
-  set(PYTHON_BUILD_TYPE "Release")
+if(${VISIT_BUILD_TYPE} MATCHES "Release")
   set(PYTHON_INSTALL_COMMAND ${CMAKE_COMMAND} -E copy ${PYTHON_MACHINE_PATH}/python27.dll <INSTALL_DIR> && ${CMAKE_COMMAND} -E copy ${PYTHON_MACHINE_PATH}/python27.lib <INSTALL_DIR> && ${CMAKE_COMMAND} -E copy ${PYTHON_MACHINE_PATH}/python.exe <INSTALL_DIR> && ${CMAKE_COMMAND} -E copy ${PYTHON_MACHINE_PATH}/kill_python.exe <INSTALL_DIR> && ${CMAKE_COMMAND} -E copy_directory Lib <INSTALL_DIR>/Lib && ${CMAKE_COMMAND} -E copy_directory Include <INSTALL_DIR>/Include && ${CMAKE_COMMAND} -E copy PC/pyconfig.h <INSTALL_DIR>/Include/pyconfig.h && ${CMAKE_COMMAND} -E make_directory <INSTALL_DIR>/Libs/ && ${CMAKE_COMMAND} -E copy ${PYTHON_MACHINE_PATH}/python27.lib <INSTALL_DIR>/Libs/)
 endif()
 
-set(PYTHON_BUILD_TYPE "${PYTHON_BUILD_TYPE}|x64")
+set(PYTHON_BUILD_TYPE "${VISIT_BUILD_TYPE}|${VISIT_PLATFORM_TYPE}")
 
 ExternalProject_Add(python
   SOURCE_DIR ${python_source}

@@ -88,7 +88,8 @@ ExternalProject_Add(vtk
   URL ${vtk_url}
   URL_MD5 ${vtk_md5}
   #PATCH_COMMAND 
-  CONFIGURE_COMMAND ${CMAKE_COMMAND} -G "NMake Makefiles" -DCMAKE_BUILD_TYPE:STRING=Release ${vopts}
+  #CMAKE_ARGS ${CMAKE_COMMAND} -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} ${vopts}
+  CMAKE_ARGS ${vopts}
   BUILD_COMMAND $(MAKE)
   INSTALL_COMMAND $(MAKE) install
   #${ep_log_options}
@@ -101,7 +102,7 @@ ExternalProject_Add(vtk
   URL ${vtk_url}
   URL_MD5 ${vtk_md5}
   #PATCH_COMMAND 
-  CONFIGURE_COMMAND ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE:STRING=Release ${vopts}
+  CMAKE_ARGS ${vopts}
   #BUILD_COMMAND $(MAKE)
   #INSTALL_COMMAND $(MAKE) install
   )

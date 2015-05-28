@@ -14,6 +14,29 @@ set(CMAKE_MODULE_PATH
   ${CMAKE_MODULE_PATH}
 )
 
+if(WIN32)
+  if(NOT VISIT_BUILD_TYPE)
+    if(CMAKE_BUILD_TYPE MATCHES "Debug")
+      SET(VISIT_BUILD_TYPE "Debug")
+    else()
+      SET(VISIT_BUILD_TYPE "Release")
+    endif()
+  endif()
+
+  if(NOT VISIT_MACHINE_TYPE)
+    message(STATUS ${CMAKE_SYSTEM_PROCESSOR})
+    if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "AMD64")
+    	SET(VISIT_PLATFORM_TYPE "x64")
+    else()
+        SET(VISIT_PLATFORM_TYPE "Win32")
+    endif()
+  endif()
+else()
+  SET(VISIT_BUILD_TYPE ${CMAKE_BUILD_TYPE})
+  SET(VISIT_PLATFORM_TYPE ${CMAKE_SYSTEM_PROCESSOR})
+endif()
+
+
 set(visit_version "trunk")  # or a number for the appropriate tag..
 set(visit_arch "${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
 string(TOLOWER ${visit_arch} visit_arch)
@@ -55,19 +78,21 @@ endmacro()
 
 include(visit_windows)
 
+include(python)
+include(qt)
+include(zlib)
+include(szip)
+include(hdf5)
+include(netcdf)
+include(silo)
+include(vtk)
+
 #add packages..
 #include(adios)
 #include(advio)
 #include(boxlib)
-#include(hdf5)
 #include(mesa)
 #include(mxml)
-include(python)
-include(qt)
-#include(silo)
-#include(szip)
-#include(zlib)
-include(vtk)
 
 #include the external project files..
 #todo: recursively include these in dependency order..

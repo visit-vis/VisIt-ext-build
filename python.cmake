@@ -14,7 +14,7 @@ set(python_binary ${CMAKE_BINARY_DIR}/${python_build_dir})
 set(python_install ${CMAKE_INSTALL_PREFIX}/${python_name}/${python_version}/${visit_arch})
 
 if(WIN32)
-  if(${CMAKE_BUILD_TYPE} MATCHES "Release")
+  if(${VISIT_BUILD_TYPE} MATCHES "Release")
     set(python_executable ${python_install}/python)
     set(python_library ${python_install}/python27.lib)
     set(python_debug_library ${python_install}/python27.lib)

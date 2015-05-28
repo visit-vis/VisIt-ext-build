@@ -26,10 +26,10 @@ set(extra_args ${qt_flags} ${extra_qt_flags})
 
 #set(extra_args ${extra_args} -make libs -make tools -fast -no-separate-debug-info)
 
-if(${CMAKE_BUILD_TYPE} MATCHES "Release")
-  set(extra_args ${extra_args} -release)
-else()
+if(${CMAKE_BUILD_TYPE} MATCHES "Debug")
   set(extra_args ${extra_args} -debug)
+else()
+  set(extra_args ${extra_args} -release)
 endif()
 
 
