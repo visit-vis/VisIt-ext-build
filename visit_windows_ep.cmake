@@ -1,3 +1,4 @@
+if(WIN32)
 add_hostconfig(visit_windows "VISIT_OPTION_DEFAULT(VISIT_WINDOWS_DIR \"${CMAKE_INSTALL_PREFIX}\")")
 
 ExternalProject_Add(visit_windows
@@ -10,3 +11,4 @@ ExternalProject_Add(visit_windows
   BUILD_COMMAND ""
   INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_BINARY_DIR}/${windows_source} <INSTALL_DIR>/distribution
   )
+endif()

@@ -1,7 +1,7 @@
 add_hostconfig(silo "VISIT_OPTION_DEFAULT(VISIT_SILO_DIR \"${silo_install}\")")
 
 IF(NOT WIN32)
-add_hostconfig(silo "VISIT_OPTION_DEFAULT(VISIT_SILO_LIBDEP HDF5_LIBRARY_DIR hdf5 \${VISIT_HDF5_LIBDEP} TYPE STRING)")
+add_hostconfig(silo "VISIT_OPTION_DEFAULT(VISIT_SILO_LIBDEP HDF5_LIBRARY_DIR hdf5 \\\${VISIT_HDF5_LIBDEP} TYPE STRING)")
 endif()
 
 set(extra_args "")
@@ -35,7 +35,7 @@ ExternalProject_Add(silo
   URL ${silo_url}
   URL_MD5 ${silo_md5}
   PATCH_COMMAND ""
-  CONFIGURE_COMMAND ./configure CXX=${CMAKE_CXX_COMPILER} CC=${CMAKE_C_COMPILER} --prefix=${silo_install} --with-hdf5=${hdf5_install}/include,${hdf5_install}/lib --with-szlib=${szip_install} --with-zlib=${zlib_install}/include,${zlib_install}/lib --disable-silex ${extra_args}
+  CONFIGURE_COMMAND ./configure CXX=${CMAKE_CXX_COMPILER} CC=${CMAKE_C_COMPILER} --prefix=${silo_install} --with-hdf5=${hdf5_install}/include,${hdf5_install}/lib --with-szlib=${szip_install} --with-zlib=${zlib_install}/include,${zlib_install}/lib --disable-silex --enable-install-lite-headers ${extra_args}
   #BUILD_COMMAND $(MAKE)
   #INSTALL_COMMAND $(MAKE) install
   #${ep_log_options}

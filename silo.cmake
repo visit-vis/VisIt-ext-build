@@ -13,11 +13,11 @@ set(silo_source ${CMAKE_BINARY_DIR}/${silo_build_dir})
 set(silo_binary ${CMAKE_BINARY_DIR}/${silo_build_dir})
 set(silo_install ${CMAKE_INSTALL_PREFIX}/${silo_name}/${silo_version}/${visit_arch})
 
-if(WIN32)
+#if(WIN32)
 set(silo_url "https://wci.llnl.gov/content/assets/docs/simulation/computer-codes/silo/silo-4.10.2/silo-4.10.2.tar.gz")
-else()
-set(silo_url "https://wci.llnl.gov/codes/silo/silo-${silo_version}/${silo_file}")
-endif()
+#else()
+#set(silo_url "https://wci.llnl.gov/codes/silo/silo-${silo_version}/${silo_file}")
+#endif()
 
 message("${silo_url}")
 

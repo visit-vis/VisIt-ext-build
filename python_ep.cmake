@@ -3,7 +3,7 @@ add_hostconfig(python "VISIT_OPTION_DEFAULT(VISIT_PYTHON_DIR \"${python_install}
 set(extra_args "")
 
 if(NOT VISIT_STATIC)
-    set(extra_args "${extra_args} --enable-shared")
+    set(extra_args --enable-shared)
 endif()
 
 
@@ -49,7 +49,8 @@ ExternalProject_Add(python
   URL ${python_url}
   URL_MD5 ${python_md5}
   PATCH_COMMAND ""
-  CONFIGURE_COMMAND ./configure OPT=${CMAKE_C_FLAGS} LDFLAGS=${CMAKE_EXE_LINKER_FLAGS} CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER} CFLAGS=${cflags} CXXFLAGS=${cxxflags} --prefix=${python_install} ${extra_args} --disable-ipv6 --enable-shared
+  #CONFIGURE_COMMAND ./configure OPT=${CMAKE_C_FLAGS} LDFLAGS=${CMAKE_EXE_LINKER_FLAGS} CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER} CFLAGS=${cflags} CXXFLAGS=${cxxflags} --prefix=${python_install} ${extra_args} --disable-ipv6 --enable-shared
+  CONFIGURE_COMMAND ./configure CC=${CMAKE_C_COMPILER} CXX=${CMAKE_CXX_COMPILER}  --prefix=${python_install} ${extra_args} --disable-ipv6 --enable-shared
   BUILD_COMMAND $(MAKE)
   INSTALL_COMMAND $(MAKE) -j1 install
   #${ep_log_options}
