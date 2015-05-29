@@ -25,6 +25,10 @@ set(vopts ${vopts} -DCMAKE_CXX_FLAGS:STRING=${CMAKE_CXX_FLAGS})
 #set(vopts ${vopts} -DCMAKE_MODULE_LINKER_FLAGS:STRING=${lf})
 #set(vopts ${vopts} -DCMAKE_SHARED_LINKER_FLAGS:STRING=${lf})
 
+if(APPLE)
+set(vopts ${vopts} -DVTK_REQUIRED_OBJCXX_FLAGS:STRING="")
+endif()
+
 set(vopts ${vopts} -DVTK_ALL_NEW_OBJECT_FACTORY:BOOL=true)
 
 # Turn off module groups

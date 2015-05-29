@@ -6,7 +6,7 @@ endif()
 
 if(NOT WIN32)
   #add_hostconfig(hdf5 "VISIT_OPTION_DEFAULT(VISIT_HDF5_LIBDEP \"${szip_install}/lib\" sz /usr/lib/x86_64-linux-gnu z TYPE STRING)")
-  add_hostconfig(hdf5 "VISIT_OPTION_DEFAULT(VISIT_HDF5_LIBDEP \"${szip_install}/lib\" sz ${zlib_install} TYPE STRING)")
+  add_hostconfig(hdf5 "VISIT_OPTION_DEFAULT(VISIT_HDF5_LIBDEP \"${szip_install}/lib\" sz \"${zlib_install}/lib\" z TYPE STRING)")
 endif()
 
 set(extra_args "")
