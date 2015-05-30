@@ -124,6 +124,10 @@ else()
   file(APPEND "${hostconfig}" "VISIT_OPTION_DEFAULT(VISIT_CXX_FLAGS \"${CMAKE_CXX_FLAGS} /DNOMINMAX\" TYPE STRING)\n\n")
 endif()
 
+if(APPLE)
+  file(APPEND "${hostconfig}" "VISIT_OPTION_DEFAULT(VISIT_CREATE_APPBUNDLE_PACKAGE ON)")
+endif()
+
 message(${hostconfig})
 foreach(module ${module_list})
     if(${module}_map)
