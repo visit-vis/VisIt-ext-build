@@ -2,7 +2,7 @@ add_hostconfig(python "VISIT_OPTION_DEFAULT(VISIT_PYTHON_DIR \"${python_install}
 
 set(extra_args "")
 
-if(NOT VISIT_STATIC AND NOT APPLE)
+if(NOT VISIT_STATIC)
     set(extra_args --enable-shared)
 endif()
 

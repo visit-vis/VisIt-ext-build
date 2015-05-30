@@ -1,7 +1,7 @@
 register_module(python)
 
 set(python_name "python")
-set(python_version 2.7.6)
+set(python_version 2.7.10)
 set(python_file "Python-${python_version}.tgz")
 set(python_compatibility_version 2.7)
 set(python_build_dir "python-${python_version}")
@@ -35,7 +35,8 @@ else()
   set(python_include_dir ${python_install}/include/python${python_compatibility_version})
 endif()
 
-set(python_url "${nersc_tp_url}/${python_file}")
+#set(python_url "${nersc_tp_url}/${python_file}")
+set(python_url "https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz")
 
 message("${python_url}")
 
