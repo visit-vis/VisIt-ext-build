@@ -27,8 +27,8 @@ ExternalProject_Add(silo
   )
 else()
 ExternalProject_Add(silo
-  DOWNLOAD_COMMAND ${WGET} ${silo_url} -O ${CMAKE_CURRENT_BINARY_DIR}/${silo_file}
-  UPDATE_COMMAND tar xvzf ${CMAKE_CURRENT_BINARY_DIR}/${silo_file} -C ${CMAKE_BINARY_DIR}
+  #DOWNLOAD_COMMAND ${WGET} ${silo_url} -O ${CMAKE_CURRENT_BINARY_DIR}/${silo_file}
+  #UPDATE_COMMAND tar xvzf ${CMAKE_CURRENT_BINARY_DIR}/${silo_file} -C ${CMAKE_BINARY_DIR}
   SOURCE_DIR ${silo_source}
   BINARY_DIR ${silo_binary}
   INSTALL_DIR ${silo_install}

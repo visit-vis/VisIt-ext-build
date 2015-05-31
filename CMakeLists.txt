@@ -75,8 +75,9 @@ macro(add_hostconfig module config)
   #message("map: ${${module}_map}")
 endmacro()
 
-
-include(visit_windows)
+if(WIN32)
+  include(visit_windows)
+endif()
 
 include(python)
 include(qt)
@@ -84,8 +85,16 @@ include(zlib)
 include(szip)
 include(hdf5)
 include(netcdf)
+include(netcdf_cxx)
 include(silo)
 include(vtk)
+
+OPTION(VISIT_RELEASE_DIR  "Build VisIt release")
+
+if(VISIT_RELEASE_DIR OR VISIT_RELEASE_PACKAGE)
+  include(visit)
+endif()
+
 
 #add packages..
 #include(adios)
@@ -97,7 +106,7 @@ include(vtk)
 #include the external project files..
 #todo: recursively include these in dependency order..
 foreach(module ${module_list})
-    include("${module}_ep")
+  include("${module}_ep")
 endforeach()
 
 foreach(module ${module_list})
@@ -135,5 +144,3 @@ foreach(module ${module_list})
         file(APPEND "${hostconfig}" "${${module}_map}\n\n")
     endif()
 endforeach()
-
-

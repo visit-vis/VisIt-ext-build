@@ -16,4 +16,3 @@ set(netcdf_install ${CMAKE_INSTALL_PREFIX}/${netcdf_name}/${netcdf_version}/${vi
 set(netcdf_url "https://github.com/Unidata/netcdf-c/archive/v4.3.3.1.zip")
 
 message("${netcdf_url}")
-
