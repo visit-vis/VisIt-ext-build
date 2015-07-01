@@ -1,0 +1,24 @@
+cmake_minimum_required(VERSION 2.8)
+
+#/Users/hari/Code/test/install/netcdf/4.3.3.1/darwin-x86_64/
+#find_package(NetCDF REQUIRED)
+
+include_directories(${NetCDF_INCLUDE_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/cxx)
+link_directories(${NetCDF_LIBRARY_DIR})
+
+set(SRCS
+#cxx/nctst.cpp
+cxx/netcdf.cpp
+#cxx/tst_many_writes.cpp
+cxx/ncvalues.cpp
+#cxx/tst_failure.cpp
+)
+
+add_library(netcdf_c++ ${SRCS})
+target_link_libraries(netcdf_c++ netcdf)
+
+INSTALL(FILES cxx/netcdfcpp.h cxx/ncvalues.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+INSTALL(TARGETS netcdf_c++ 
+	LIBRARY DESTINATION lib
+	RUNTIME DESTINATION bin
+	ARCHIVE DESTINATION lib)
