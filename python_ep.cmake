@@ -15,7 +15,7 @@ if(WIN32)
 if(VISIT_PLATFORM_TYPE MATCHES "x64")
   set(PYTHON_MACHINE_PATH "PCbuild/amd64")
 else()
-  set(PYTHON_MACHINE_PATH "PCbuild/win32")
+  set(PYTHON_MACHINE_PATH "PCbuild/")
 endif()
 
 

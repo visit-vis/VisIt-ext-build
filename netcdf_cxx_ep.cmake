@@ -13,6 +13,15 @@ if(VISIT_STATIC)
 endif()
 
 if(WIN32)
+  ExternalProject_Add(netcdf_cxx
+    SOURCE_DIR ${netcdf_cxx_source}
+    BINARY_DIR ${netcdf_cxx_binary}
+    INSTALL_DIR ${netcdf_install} #installs to netcdf location..
+    PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/NETCDFCXXCMake.txt <SOURCE_DIR>/CMakeLists.txt && ${CMAKE_COMMAND} -E copy <SOURCE_DIR>/config.h.in <SOURCE_DIR>/config.h
+    URL ${netcdf_cxx_url_c}
+    #URL_MD5 ${netcdf_cxx_md5}
+    CMAKE_ARGS -DNetCDF_INCLUDE_DIR=${netcdf_install}/include -DNetCDF_LIBRARY_DIR=${netcdf_install}/lib -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+    )
 else()
   ExternalProject_Add(netcdf_cxx
     SOURCE_DIR ${netcdf_cxx_source}/c4

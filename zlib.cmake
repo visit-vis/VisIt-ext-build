@@ -13,6 +13,16 @@ set(zlib_source ${CMAKE_BINARY_DIR}/${zlib_build_dir})
 set(zlib_binary ${CMAKE_BINARY_DIR}/${zlib_build_dir})
 set(zlib_install ${CMAKE_INSTALL_PREFIX}/${zlib_name}/${zlib_version}/${visit_arch})
 
+set(zlib_library ${zlib_install}/lib/zlib.so)
+
+if(WIN32)
+  if(${VISIT_BUILD_TYPE} MATCHES "Release")
+    set(zlib_library ${zlib_install}/lib/zlib.lib)
+  else()
+    set(zlib_library ${zlib_install}/lib/zlib_D.lib)
+  endif()
+endif()
+
 if(NOT WIN32)
   set(zlib_url "${nersc_tp_url}/${zlib_file}")
 else()

@@ -1,4 +1,10 @@
+if(NOT WIN32)
 add_hostconfig(silo "VISIT_OPTION_DEFAULT(VISIT_SILO_DIR \"${silo_install}\")")
+else() #SILO WINDOWS DEBUG MODE DOESNT WORK FOR NOW...
+  if(${VISIT_BUILD_TYPE} MATCHES "Release")
+    add_hostconfig(silo "VISIT_OPTION_DEFAULT(VISIT_SILO_DIR \"${silo_install}\")")
+  endif()
+endif()
 
 IF(NOT WIN32)
 add_hostconfig(silo "VISIT_OPTION_DEFAULT(VISIT_SILO_LIBDEP HDF5_LIBRARY_DIR hdf5 \\\${VISIT_HDF5_LIBDEP} TYPE STRING)")

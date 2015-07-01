@@ -13,6 +13,16 @@ set(szip_source ${CMAKE_BINARY_DIR}/${szip_build_dir})
 set(szip_binary ${CMAKE_BINARY_DIR}/${szip_build_dir})
 set(szip_install ${CMAKE_INSTALL_PREFIX}/${szip_name}/${szip_version}/${visit_arch})
 
+set(szip_library ${szip_install}/lib/szip.so)
+
+if(WIN32)
+  if(${VISIT_BUILD_TYPE} MATCHES "Release")
+    set(szip_library ${szip_install}/lib/szip.lib)
+  else()
+    set(szip_library ${szip_install}/lib/szip_D.lib)
+  endif()
+endif()
+
 if(NOT WIN32)
 set(szip_url "${nersc_tp_url}/${szip_file}")
 else()

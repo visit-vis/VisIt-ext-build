@@ -19,7 +19,7 @@ if(WIN32)
     INSTALL_DIR ${netcdf_install}
     URL ${netcdf_url}
     URL_MD5 ${netcdf_md5}
-    CMAKE_ARGS -DBUILD_SHARED_LIBS:BOOL=ON -DENABLE_DAP:BOOL=OFF -DZLIB_DIR=${zlib_install} -DZLIB_INCLUDE_DIR=${zlib_install}/include -DZLIB_LIBRARY=${zlib_install}/lib/zlib.lib -DZLIB_LIBRARIES=${zlib_install}/lib/zlib.lib -DHDF5_DIR:PATH=${hdf5_install}/cmake -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+    CMAKE_ARGS -DBUILD_SHARED_LIBS:BOOL=ON -DENABLE_DAP:BOOL=OFF -DZLIB_DIR=${zlib_install} -DZLIB_INCLUDE_DIR=${zlib_install}/include -DZLIB_LIBRARY=${zlib_library} -DZLIB_LIBRARIES=${zlib_library} -DHDF5_DIR:PATH=${hdf5_install}/cmake -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
     )
 else()
   ExternalProject_Add(netcdf

@@ -1,7 +1,11 @@
 add_hostconfig(zlib "VISIT_OPTION_DEFAULT(VISIT_ZLIB_DIR \"${zlib_install}\")")
 
 if(WIN32)
-  add_hostconfig(zlib "SET(ZLIB_LIB_NAME zlib)")
+  if(${VISIT_BUILD_TYPE} MATCHES "Release")
+    add_hostconfig(zlib "SET(ZLIB_LIB_NAME zlib)")
+  else()
+    add_hostconfig(zlib "SET(ZLIB_LIB_NAME zlib_d)")
+  endif()
 endif()
 
 set(extra_args "")

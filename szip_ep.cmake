@@ -1,7 +1,11 @@
 add_hostconfig(szip "VISIT_OPTION_DEFAULT(VISIT_SZIP_DIR \"${szip_install}\")")
 
 if(WIN32)
-  add_hostconfig(szip "SET(SZIP_LIB_NAME szip)")
+  if(${VISIT_BUILD_TYPE} MATCHES "Release")
+    add_hostconfig(szip "SET(SZIP_LIB_NAME szip)")
+  else()
+    add_hostconfig(szip "SET(SZIP_LIB_NAME szip_d)")
+  endif()
 endif()
 
 set(extra_args "")
