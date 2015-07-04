@@ -5,13 +5,15 @@
 #endif()
 
 if(VISIT_RELEASE_PACKAGE)
+
+  #TODO REMOVE THE PATCH AFTER THE VisIt 2.10 release..
 ExternalProject_Add(visit
   SOURCE_DIR ${visit_source}
   BINARY_DIR ${visit_binary}
   INSTALL_DIR ${CMAKE_INSTALL_PREFIX}
   SVN_REPOSITORY ${visit_url}
   CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DVISIT_CONFIG_SITE=${hostconfig}
-  PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/FindHDF5.cmake ${visit_source}/CMake/FindHDF5.cmake
+  PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/FindHDF5.cmake.in ${visit_source}/CMake/FindHDF5.cmake
   INSTALL_COMMAND make package
   )
 else()

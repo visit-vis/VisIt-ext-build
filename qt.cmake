@@ -1,7 +1,7 @@
 register_module(qt)
 
 set(qt_name "qt")
-set(qt_version 4.8.6)
+set(qt_version 4.8.7)
 set(qt_file "qt-everywhere-opensource-src-${qt_version}.tar.gz")
 set(qt_compatibility_version 4.8)
 set(qt_build_dir "qt-${qt_version}")
@@ -13,7 +13,8 @@ set(qt_source ${CMAKE_BINARY_DIR}/${qt_build_dir})
 set(qt_binary ${CMAKE_BINARY_DIR}/${qt_build_dir})
 set(qt_install ${CMAKE_INSTALL_PREFIX}/${qt_name}/${qt_version}/${visit_arch})
 
-set(qt_url "${nersc_tp_url}/${qt_file}")
+#set(qt_url "${nersc_tp_url}/${qt_file}")
+set(qt_url "http://download.qt.io/official_releases/qt/4.8/4.8.7/${qt_file}")
 
 message("${qt_url}")
 

@@ -1,7 +1,7 @@
 register_module(hdf5)
 
 set(hdf5_name "hdf5")
-set(hdf5_version 1.8.15)
+set(hdf5_version 1.8.15-patch1)
 if(WIN32)
 set(hdf5_file "hdf5-${hdf5_version}-CMake.zip")
 else()
